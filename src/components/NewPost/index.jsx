@@ -1,4 +1,5 @@
 import Container from 'components/Shared/Container';
+import SearchGIF from 'components/Shared/SearchGIF';
 import { useState } from 'react';
 
 const NewPost = () => {
@@ -9,7 +10,7 @@ const NewPost = () => {
 	return (
 		<Container>
 			<div
-				className='flex items-center gap-2 bg-gray-100'
+				className='flex items-center gap-2 bg-gray-100 rounded-tl-lg rounded-tr-lg'
 				style={{ width: '40rem' }}>
 				<div className='flex items-center gap-1 px-4 py-2 font-semibold cursor-pointer'>
 					<svg
@@ -124,17 +125,7 @@ const NewPost = () => {
 						/>
 					</svg>
 					<span>GIF</span>
-					{gifWindow && (
-						<div className='absolute p-2 bg-gray-200 rounded-md shadow-lg w-72 top-12'>
-							<div>
-								<input
-									type='text'
-									className='w-full rounded-md outline-none'
-									onClick={(e) => e.stopPropagation()}
-								/>
-							</div>
-						</div>
-					)}
+					{gifWindow && <SearchGIF />}
 				</div>
 				<div className='flex items-center gap-1 px-4 py-2 font-medium bg-gray-200 cursor-pointer rounded-3xl hover:bg-gray-100'>
 					<svg
