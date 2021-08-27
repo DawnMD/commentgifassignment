@@ -7,6 +7,7 @@ const fetcher = (url) =>
 			params: {
 				api_key: 'T76V8Fr3TiWY6YSc5BqkKE3medMpekoy',
 				rating: 'g',
+				limit: 10,
 			},
 		})
 		.then((res) => res.data);
