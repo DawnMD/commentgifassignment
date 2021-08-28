@@ -1,15 +1,26 @@
 import Container from 'components/Shared/Container';
+import GIF from 'components/Shared/GIF';
+import SearchGIF from 'components/Shared/SearchGIF';
 import { useState } from 'react';
 
 const NewPost = () => {
 	const [gifWindow, setGifWindow] = useState(false);
+	const [selectedGIF, setSelectedGIF] = useState(null);
 	const handleGifWindow = () => {
 		setGifWindow(!gifWindow);
+	};
+	const selectGIFImage = (gif) => {
+		if (selectedGIF) {
+			setSelectedGIF(null);
+			setSelectedGIF(gif);
+		} else {
+			setSelectedGIF(gif);
+		}
 	};
 	return (
 		<Container>
 			<div
-				className='flex items-center gap-2 bg-gray-100'
+				className='flex items-center gap-2 bg-gray-100 rounded-tl-lg rounded-tr-lg'
 				style={{ width: '40rem' }}>
 				<div className='flex items-center gap-1 px-4 py-2 font-semibold cursor-pointer'>
 					<svg
@@ -78,8 +89,17 @@ const NewPost = () => {
 					cols='30'
 					rows='5'
 					className='w-full h-32 border-none outline-none focus:outline-none focus:ring-0'
-					placeholder='Write Something Here...'></textarea>
+					placeholder='Write Something Here...'
+				/>
 			</div>
+			{selectedGIF && (
+				<div className='mx-auto'>
+					<GIF
+						src={selectedGIF.images?.downsized?.url}
+						alt={selectedGIF.title}
+					/>
+				</div>
+			)}
 			<div className='grid grid-cols-2 gap-3 px-4 py-2'>
 				<div className='flex items-center gap-1 px-4 py-2 font-medium bg-gray-200 cursor-pointer rounded-3xl hover:bg-gray-100'>
 					<svg
@@ -124,17 +144,7 @@ const NewPost = () => {
 						/>
 					</svg>
 					<span>GIF</span>
-					{gifWindow && (
-						<div className='absolute p-2 bg-gray-200 rounded-md shadow-lg w-72 top-12'>
-							<div>
-								<input
-									type='text'
-									className='w-full rounded-md outline-none'
-									onClick={(e) => e.stopPropagation()}
-								/>
-							</div>
-						</div>
-					)}
+					{gifWindow && <SearchGIF onClickGIF={selectGIFImage} />}
 				</div>
 				<div className='flex items-center gap-1 px-4 py-2 font-medium bg-gray-200 cursor-pointer rounded-3xl hover:bg-gray-100'>
 					<svg
