@@ -9,20 +9,10 @@ const NewPost = () => {
 	const handleGifWindow = () => {
 		setGifWindow(!gifWindow);
 	};
-	const selectGIFImage = (gif) => {
-		if (selectedGIF) {
-			setSelectedGIF(null);
-			setSelectedGIF(gif);
-		} else {
-			setSelectedGIF(gif);
-		}
-	};
 	return (
 		<Container>
-			<div
-				className='flex items-center gap-2 bg-gray-100 rounded-tl-lg rounded-tr-lg'
-				style={{ width: '40rem' }}>
-				<div className='flex items-center gap-1 px-4 py-2 font-semibold cursor-pointer'>
+			<div className='flex items-center gap-2 bg-gray-100 rounded-tl-lg rounded-tr-lg'>
+				<div className='flex items-center gap-1 px-4 py-2 font-semibold cursor-pointer '>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
 						className='w-4 h-4'
@@ -101,7 +91,7 @@ const NewPost = () => {
 				</div>
 			)}
 			<div className='grid grid-cols-2 gap-3 px-4 py-2'>
-				<div className='flex items-center gap-1 px-4 py-2 font-medium bg-gray-200 cursor-pointer rounded-3xl hover:bg-gray-100'>
+				<div className='flex items-center gap-1 px-4 py-2 font-medium bg-gray-100 cursor-pointer rounded-3xl hover:bg-gray-200'>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
 						className='w-4 h-4'
@@ -115,7 +105,7 @@ const NewPost = () => {
 					</svg>
 					<span>Tag Friends</span>
 				</div>
-				<div className='flex items-center gap-1 px-4 py-2 font-medium bg-gray-200 cursor-pointer rounded-3xl hover:bg-gray-100'>
+				<div className='flex items-center gap-1 px-4 py-2 font-medium bg-gray-100 cursor-pointer rounded-3xl hover:bg-gray-200'>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
 						className='w-4 h-4'
@@ -130,7 +120,7 @@ const NewPost = () => {
 					<span>Add Location</span>
 				</div>
 				<div
-					className='relative flex items-center gap-1 px-4 py-2 font-medium bg-gray-200 cursor-pointer rounded-3xl hover:bg-gray-100'
+					className='relative flex items-center gap-1 px-4 py-2 font-medium bg-gray-100 cursor-pointer rounded-3xl hover:bg-gray-200'
 					onClick={handleGifWindow}>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
@@ -144,9 +134,9 @@ const NewPost = () => {
 						/>
 					</svg>
 					<span>GIF</span>
-					{gifWindow && <SearchGIF onClickGIF={selectGIFImage} />}
+					{gifWindow && <SearchGIF onClickGIF={(gif) => setSelectedGIF(gif)} />}
 				</div>
-				<div className='flex items-center gap-1 px-4 py-2 font-medium bg-gray-200 cursor-pointer rounded-3xl hover:bg-gray-100'>
+				<div className='flex items-center gap-1 px-4 py-2 font-medium bg-gray-100 cursor-pointer rounded-3xl hover:bg-gray-200'>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
 						className='w-4 h-4'

@@ -1,22 +1,11 @@
-import { useGIF } from 'api/useGIF';
-import axios from 'axios';
+import { fetcher, useGIF } from 'api/useGIF';
 import { useEffect, useState } from 'react';
 import GIF from '../GIF';
 
-const fetchSearchGIF = async (query) => {
-	const data = await axios.get('https://api.giphy.com/v1/gifs/search', {
-		params: {
-			api_key: 'T76V8Fr3TiWY6YSc5BqkKE3medMpekoy',
-			limit: 10,
-			rating: 'g',
-			q: query,
-		},
-	});
-	return data;
-};
 const SearchGIF = (props) => {
 	const [searchedGIF, setSearchedGIF] = useState(null);
 	const [searchVal, setSearchVal] = useState('');
+	//fetch trending at component mount
 	const { isData, isError, isLoading } = useGIF('/trending');
 	//setting trending results
 	useEffect(() => {
@@ -26,8 +15,8 @@ const SearchGIF = (props) => {
 	useEffect(() => {
 		if (searchVal !== '') {
 			const debounceHandle = setTimeout(async () => {
-				const gifsSearch = await fetchSearchGIF(searchVal);
-				setSearchedGIF(gifsSearch.data);
+				const gifsSearch = await fetcher('/search', searchVal);
+				setSearchedGIF(gifsSearch);
 			}, 500);
 			return () => clearTimeout(debounceHandle);
 		}
