@@ -1,22 +1,20 @@
 import useSWR from 'swr';
 import axios from 'axios';
 
-const fetcher = (url) =>
+export const fetcher = (type, query) =>
 	axios
-		.get(url, {
+		.get(`https://api.giphy.com/v1/gifs${type}`, {
 			params: {
 				api_key: 'T76V8Fr3TiWY6YSc5BqkKE3medMpekoy',
 				rating: 'g',
 				limit: 10,
+				q: query,
 			},
 		})
 		.then((res) => res.data);
 
-export function useGIF(type) {
-	const { data, error } = useSWR(
-		`https://api.giphy.com/v1/gifs${type}`,
-		fetcher
-	);
+export function useGIF(type, query) {
+	const { data, error } = useSWR(type, (type) => fetcher(type, query));
 
 	return {
 		isData: data,
